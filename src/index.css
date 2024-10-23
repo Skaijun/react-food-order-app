@@ -156,6 +156,7 @@ h1 {
   display: flex;
   gap: 1rem;
   align-items: center;
+  margin-left: 5rem;
 }
 
 .cart-item-actions button {
