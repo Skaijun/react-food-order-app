@@ -185,6 +185,10 @@ h1 {
   flex-direction: column;
 }
 
+.checkout-half-width-input {
+  width: 50%;
+}
+
 .control label {
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -192,7 +196,7 @@ h1 {
 
 .control input {
   width: 100%;
-  max-width: 20rem;
+  /* max-width: 20rem; */
   font: inherit;
   padding: 0.5rem;
   border-radius: 4px;
