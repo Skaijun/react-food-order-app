@@ -49,15 +49,16 @@ app.post('/orders', async (req, res) => {
     });
   }
 
+  const id = (Math.random() * 1000).toString();
   const newOrder = {
     ...orderData,
-    id: (Math.random() * 1000).toString(),
+    id,
   };
   const orders = await fs.readFile('./data/orders.json', 'utf8');
   const allOrders = JSON.parse(orders);
   allOrders.push(newOrder);
   await fs.writeFile('./data/orders.json', JSON.stringify(allOrders));
-  res.status(201).json({ message: 'Order created!' });
+  res.status(201).json({ message: 'Order created!', id });
 });
 
 app.use((req, res) => {

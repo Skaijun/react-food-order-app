@@ -1,33 +1,18 @@
-import { useState, useEffect } from 'react';
-
 import MealItem from './MealItem.jsx';
-import { fetchMeals } from '../http.js';
+import useHttp from '../hooks/useHttp.js';
+import ErrorNotification from './ErrorNotification.jsx';
+
+const initDataConfig = {}; // to make useEffect work correct > not update config var-dependency
 
 export default function Meals() {
-    const [meals, setMeals] = useState([]);
-    const [isFetching, setIsFetching] = useState(false);
-
-    useEffect(() => {
-        async function fetchProducts() {
-
-            try {
-                setIsFetching(true);
-                const meals = await fetchMeals();
-                setMeals(meals);
-                setIsFetching(true);
-            } catch (err) {
-                console.log(err);
-                setIsFetching(false);
-            }
-
-            setIsFetching(false);
-        }
-
-        fetchProducts();
-    }, []);
+    const { data: meals, isLoading: isFetching, errMsg } = useHttp('http://localhost:3000/meals', initDataConfig, []);
 
     if (isFetching) {
-        return <p>Loading meals, please wait for a moment..</p>
+        return <p className='center'>Loading meals, please wait for a moment..</p>
+    }
+
+    if (errMsg) {
+        return <ErrorNotification title='Failed to fetch Meals' message={errMsg} />
     }
 
     return (
