@@ -49,7 +49,7 @@ export default function Checkout() {
     }
 
     let actions = (<>
-        <Button type="button" textOnly onClick={() => userProgressCtx.hideCheckout()}>Close</Button>
+        <Button type="button" textOnly onClick={() => userProgressCtx.showCart()}>Close</Button>
         <Button>Submit Order</Button>
     </>);
 
@@ -67,7 +67,7 @@ export default function Checkout() {
         </Modal>
     }
 
-    return <Modal className="checkout" open={userProgressCtx.progress === 'checkout'} onClose={() => userProgressCtx.showCart()}>
+    return <Modal className="checkout" open={userProgressCtx.progress === 'checkout'} onClose={() => userProgressCtx.hideCheckout()}>
         <form onSubmit={handleSubmitCheckout}>
             <h2>Checkout</h2>
             <p>Total Amount: {formattedTotals}</p>
